@@ -1,0 +1,13 @@
+# Dependencies
+node_modules/
+
+# Secrets — NEVER commit your real .env
+.env
+
+# Runtime data (leads, contact submissions)
+projects/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.log

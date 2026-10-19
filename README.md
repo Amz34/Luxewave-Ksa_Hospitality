@@ -4,7 +4,7 @@ AI-powered website for **Luxe Wave Company** — a wholesale hospitality supply
 company in Saudi Arabia (hotel amenities, bed & bath linen, room essentials,
 and more) serving 4–5 star hotels, furnished apartments, and hospitals.
 
-**Live demo:** [luxewave-ksa.netlify.app](https://luxewave-ksa.netlify.app)
+**Live demo:** [amz34.github.io/Luxewave-Ksa_Hospitality](https://amz34.github.io/Luxewave-Ksa_Hospitality/)
 
 ![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)
 ![Stack](https://img.shields.io/badge/Stack-Express%20%2B%20Netlify%20Functions-teal.svg)

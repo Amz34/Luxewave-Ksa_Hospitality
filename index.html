@@ -95,21 +95,199 @@ h2.h-sec{font-size:clamp(30px,3.6vw,50px);margin:0 0 18px}
 .site-nav.scrolled .announce{display:none}
 @media (max-width:760px){.announce{display:none}}
 /* ---------- nav ---------- */
-.site-nav{position:fixed;top:0;left:0;right:0;z-index:60;transition:background .35s var(--ease),box-shadow .35s,backdrop-filter .35s}
-.site-nav .bar{display:flex;align-items:center;justify-content:space-between;gap:24px;height:78px;max-width:var(--max);margin:0 auto;padding:0 24px}
-.site-nav.scrolled{background:rgba(11,27,61,.96);backdrop-filter:saturate(140%) blur(10px);box-shadow:0 10px 30px rgba(0,0,0,.28)}
-.brand{display:flex;align-items:center;gap:12px}
-.brand img{height:40px;width:auto}
-.nav-links{display:flex;align-items:center;gap:26px;list-style:none;margin:0;padding:0}
-.nav-links a{font-size:14px;font-weight:500;color:rgba(255,255,255,.86);letter-spacing:.01em;position:relative;padding:6px 0}
-.nav-links a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:1px;background:var(--gold);transition:width .3s var(--ease)}
-.nav-links a:hover{color:#fff}
-.nav-links a:hover::after{width:100%}
-.nav-right{display:flex;align-items:center;gap:12px}
-.nav-toggle{display:none;background:transparent;border:1px solid rgba(255,255,255,.28);border-radius:var(--r);width:44px;height:40px;align-items:center;justify-content:center;cursor:pointer}
-.nav-toggle span,.nav-toggle span::before,.nav-toggle span::after{content:"";display:block;width:18px;height:1.5px;background:#fff;position:relative}
-.nav-toggle span::before{position:absolute;top:-6px}
-.nav-toggle span::after{position:absolute;top:6px}
+.site-nav{position:fixed;top:0;left:0;right:0;z-index:900;background:rgba(8,18,42,.92);backdrop-filter:saturate(140%) blur(12px);-webkit-backdrop-filter:saturate(140%) blur(12px);border-bottom:1px solid rgba(201,164,92,.18);transition:background .35s var(--ease),box-shadow .35s}
+.site-nav .bar{display:flex;align-items:center;justify-content:space-between;gap:18px;height:74px;max-width:var(--max);margin:0 auto;padding:0 24px}
+.site-nav.scrolled{background:rgba(8,18,42,.98);box-shadow:0 10px 30px rgba(0,0,0,.35)}
+.brand{display:flex;align-items:center;gap:12px;flex-shrink:0}
+.brand img{height:36px;width:auto;min-width:130px;max-width:160px;object-fit:contain;flex-shrink:0}
+.desktop-nav{display:flex;align-items:center}
+.desktop-nav .nav-links{display:flex;align-items:center;gap:16px;list-style:none;margin:0;padding:0}
+.desktop-nav .nav-links a{font-size:13.5px;font-weight:500;color:rgba(255,255,255,.88);letter-spacing:.01em;position:relative;padding:6px 0;white-space:nowrap}
+.desktop-nav .nav-links a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:1.5px;background:var(--gold);transition:width .3s var(--ease)}
+.desktop-nav .nav-links a:hover{color:#fff}
+.desktop-nav .nav-links a:hover::after{width:100%}
+.desktop-nav .nav-links a.nav-highlight{color:var(--gold-lt);font-weight:600}
+.nav-right{display:flex;align-items:center;gap:10px;flex-shrink:0}
+
+/* Language Switcher Tab */
+.lang-btn{
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(201,164,92,.45);
+  color:#E8ECF5;
+  padding:7px 14px;
+  border-radius:20px;
+  font-family:var(--sans);
+  font-size:13px;
+  font-weight:600;
+  cursor:pointer;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  transition:all .25s var(--ease);
+  white-space:nowrap;
+  user-select:none;
+}
+.lang-btn:hover{background:rgba(201,164,92,.22);border-color:var(--gold);color:#fff;transform:translateY(-1px)}
+.lang-btn--sm{padding:6px 11px;font-size:12px}
+
+/* Mobile Toggle Hamburger Button */
+.nav-toggle{
+  display:none;
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(201,164,92,.35);
+  border-radius:6px;
+  width:42px;
+  height:40px;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  padding:0;
+  flex-direction:column;
+  gap:5px;
+  transition:all .25s var(--ease);
+}
+.nav-toggle:hover{background:rgba(201,164,92,.2);border-color:var(--gold)}
+.nav-toggle span,.nav-toggle::before,.nav-toggle::after{content:"";display:block;width:20px;height:2px;background:#fff;border-radius:2px;transition:all .3s var(--ease)}
+.nav-toggle.open span{opacity:0}
+.nav-toggle.open::before{transform:translateY(7px) rotate(45deg);background:var(--gold)}
+.nav-toggle.open::after{transform:translateY(-7px) rotate(-45deg);background:var(--gold)}
+
+/* Mobile Drawer & Backdrop (Independent of Navbar) */
+.drawer-backdrop{
+  position:fixed;
+  inset:0;
+  background:rgba(4,10,24,.75);
+  backdrop-filter:blur(6px);
+  -webkit-backdrop-filter:blur(6px);
+  z-index:9998;
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+  transition:opacity .35s var(--ease),visibility .35s;
+}
+.drawer-backdrop.open{opacity:1;visibility:visible;pointer-events:auto}
+
+.mobile-drawer{
+  position:fixed;
+  top:0;
+  right:0;
+  bottom:0;
+  width:min(340px,86vw);
+  height:100vh;
+  height:100dvh;
+  background:#08122A;
+  z-index:9999;
+  display:flex;
+  flex-direction:column;
+  transform:translateX(100%);
+  visibility:hidden;
+  pointer-events:none;
+  transition:transform .35s cubic-bezier(.2,.8,.2,1),visibility .35s;
+  box-shadow:-20px 0 60px rgba(0,0,0,.6);
+  border-left:1px solid rgba(201,164,92,.25);
+  overflow:hidden;
+}
+.mobile-drawer.open{transform:translateX(0);visibility:visible;pointer-events:auto}
+
+.drawer-head{
+  padding:16px 18px;
+  border-bottom:1px solid rgba(201,164,92,.2);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  background:rgba(11,27,61,.85);
+  flex-shrink:0;
+}
+.drawer-brand img{height:30px;width:auto}
+.drawer-actions{display:flex;align-items:center;gap:8px}
+.drawer-close{
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.16);
+  color:#fff;
+  width:36px;
+  height:36px;
+  border-radius:50%;
+  font-size:20px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  line-height:1;
+  transition:all .2s;
+}
+.drawer-close:hover{background:rgba(201,164,92,.3);color:#E7D3A1}
+
+.drawer-body{
+  padding:18px 16px 28px;
+  overflow-y:auto;
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+  -webkit-overflow-scrolling:touch;
+}
+.drawer-links{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:3px}
+.drawer-links li a{
+  display:flex;
+  align-items:center;
+  gap:11px;
+  padding:11px 13px;
+  border-radius:8px;
+  color:#E8ECF5;
+  font-size:14.5px;
+  font-weight:500;
+  transition:all .2s;
+  border:1px solid transparent;
+}
+.drawer-links li a:hover,.drawer-links li a:active{
+  background:rgba(201,164,92,.14);
+  border-color:rgba(201,164,92,.32);
+  color:#fff;
+  transform:translateX(4px);
+}
+.drawer-links li a.drawer-holy{
+  background:linear-gradient(90deg,rgba(201,164,92,.18),transparent);
+  border-color:rgba(201,164,92,.35);
+  color:#E7D3A1;
+  font-weight:600;
+}
+.drawer-links .d-icon{font-size:16px;width:20px;text-align:center;flex-shrink:0}
+.drawer-cta-box{
+  background:rgba(11,27,61,.75);
+  border:1px solid rgba(201,164,92,.28);
+  border-radius:12px;
+  padding:16px 14px;
+  margin-top:auto;
+  flex-shrink:0;
+}
+.drawer-cta-title{
+  font-size:13px;
+  font-weight:700;
+  color:#E7D3A1;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  margin-bottom:4px;
+}
+.drawer-cta-sub{
+  font-size:11.5px;
+  color:rgba(232,236,245,.72);
+  margin-bottom:12px;
+  line-height:1.45;
+}
+
+/* RTL Support */
+html[dir="rtl"]{direction:rtl;text-align:right}
+html[dir="rtl"] .eyebrow::before{margin-left:10px;margin-right:0}
+html[dir="rtl"] .hero-trust li::before{margin-left:9px;margin-right:0}
+html[dir="rtl"] .cinfo .cl,html[dir="rtl"] .cinfo .k{text-align:right}
+html[dir="rtl"] .mobile-drawer{right:auto;left:0;transform:translateX(-100%);border-left:none;border-right:1px solid rgba(201,164,92,.25)}
+html[dir="rtl"] .mobile-drawer.open{transform:translateX(0)}
+html[dir="rtl"] .drawer-links li a:hover,html[dir="rtl"] .drawer-links li a:active{transform:translateX(-4px)}
+html[dir="rtl"] .float-wa{left:auto;right:16px}
+html[dir="rtl"] .chat-launcher{right:auto;left:16px}
+html[dir="rtl"] .chat-window{right:auto;left:10px}
+html[dir="rtl"] .pwa-banner{left:auto;right:16px}
 
 /* ---------- hero ---------- */
 .hero{position:relative;min-height:92vh;display:flex;align-items:center;overflow:hidden;background:var(--ink);padding:150px 0 70px}
@@ -558,12 +736,16 @@ footer.foot{background:#08122A;color:var(--tx-inv-2);padding:70px 0 28px;border-
 .pwa-close:hover { color: #fff; }
 
 /* ---------- responsive ---------- */
-@media (max-width:1100px){
+@media (max-width:1160px){
+  .desktop-nav{display:none !important}
+  .nav-toggle{display:flex !important}
+  .nav-cta{display:none !important}
+  .holy-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
   .cat-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
   .stats-row{grid-template-columns:repeat(2,minmax(0,1fr));gap:34px}
   .steps,.cert-cards{grid-template-columns:repeat(2,minmax(0,1fr))}
   .foot-grid{grid-template-columns:1fr 1fr;gap:34px}
-  .holy-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .calc-results-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media (max-width:900px){
   .section{padding:70px 0}
@@ -575,38 +757,7 @@ footer.foot{background:#08122A;color:var(--tx-inv-2);padding:70px 0 28px;border-
   .hero h1{max-width:none}
   .hero-trust{gap:12px 22px}
   .about-badge{right:14px;bottom:-18px}
-  .nav-links{
-    position:fixed;
-    top:0;
-    right:0;
-    bottom:0;
-    width:min(320px,86vw);
-    background:var(--ink);
-    flex-direction:column;
-    align-items:flex-start;
-    gap:6px;
-    padding:96px 26px 30px;
-    transform:translateX(100%);
-    visibility:hidden;
-    opacity:0;
-    pointer-events:none;
-    transition:transform .35s var(--ease), visibility .35s, opacity .35s;
-    box-shadow:-20px 0 60px rgba(0,0,0,.4);
-    z-index:1000;
-    overflow-y:auto;
-  }
-  .nav-links.open{
-    transform:translateX(0);
-    visibility:visible;
-    opacity:1;
-    pointer-events:auto;
-  }
-  .nav-links a{font-size:16px;width:100%;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.08)}
-  .nav-toggle{display:flex; z-index:1001;}
-  .nav-right .btn{display:none}
   .float-btns{bottom:auto;top:50%;transform:translateY(-50%);left:14px}
-  .calc-results-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .holy-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 
 @media (max-width:640px){
@@ -617,6 +768,10 @@ footer.foot{background:#08122A;color:var(--tx-inv-2);padding:70px 0 28px;border-
   }
   body{font-size:15px; -webkit-text-size-adjust:100%;}
   .wrap{padding:0 16px; width:100%; box-sizing:border-box;}
+  .site-nav .bar{padding:0 16px; height:68px}
+  .brand img{height:30px; min-width:110px}
+  .lang-btn{padding:5px 10px; font-size:11.5px}
+  .nav-toggle{width:38px; height:36px}
   .cat-grid,.steps,.cert-cards,.stats-row{grid-template-columns:1fr}
   .section{padding:52px 0}
   .hero{padding:106px 0 90px}
@@ -691,25 +846,71 @@ footer.foot{background:#08122A;color:var(--tx-inv-2);padding:70px 0 28px;border-
     <a class="brand" href="#home" aria-label="Luxe Wave home">
       <img src="assets/logo.png" alt="Luxe Wave — premium hospitality supply" width="1011" height="240">
     </a>
-    <nav>
-      <ul class="nav-links" id="navLinks">
-        <li><a href="#about">About</a></li>
-        <li><a href="#categories">What We Supply</a></li>
-        <li><a href="#mattresses">Mattresses</a></li>
-        <li><a href="#holysites" style="color:var(--gold-lt);">Holy Sites Protocol</a></li>
-        <li><a href="#simulator">1-PO Calculator</a></li>
-        <li><a href="#why">Why Us</a></li>
-        <li><a href="#compliance">Compliance</a></li>
-        <li><a href="#contact">Contact</a></li>
-        <li><a href="https://8k6ikq-g6.myshopify.com/" target="_blank" rel="noopener">Shop Store</a></li>
+    <nav class="desktop-nav" aria-label="Desktop Primary Navigation">
+      <ul class="nav-links">
+        <li><a href="#about" id="navLinkAbout">About</a></li>
+        <li><a href="#categories" id="navLinkSupply">What We Supply</a></li>
+        <li><a href="#mattresses" id="navLinkMatt">Mattresses</a></li>
+        <li><a href="#holysites" id="navLinkHoly" class="nav-highlight">Holy Sites Protocol</a></li>
+        <li><a href="#simulator" id="navLinkCalc">1-PO Calculator</a></li>
+        <li><a href="#why" id="navLinkWhy">Why Us</a></li>
+        <li><a href="#compliance" id="navLinkComp">Compliance</a></li>
+        <li><a href="#contact" id="navLinkContact">Contact</a></li>
+        <li><a href="https://8k6ikq-g6.myshopify.com/" target="_blank" rel="noopener" id="navLinkShop">Shop Store</a></li>
       </ul>
     </nav>
     <div class="nav-right">
-      <a class="btn btn--gold btn--sm" href="https://wa.me/966574268856?text=Salam%20Luxe%20Wave%2C%20I%20would%20like%20a%20quotation%20for%20my%20property." target="_blank" rel="noopener">Request a Quote</a>
-      <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span></button>
+      <button type="button" class="lang-btn" id="langToggle" aria-label="Switch Language to Arabic">
+        <span class="lang-text">🇸🇦 العربية</span>
+      </button>
+      <a class="btn btn--gold btn--sm nav-cta" id="navQuoteBtn" href="https://wa.me/966574268856?text=Salam%20Luxe%20Wave%2C%20I%20would%20like%20a%20quotation%20for%20my%20property." target="_blank" rel="noopener">Request a Quote</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Open Navigation Menu" aria-expanded="false">
+        <span></span>
+      </button>
     </div>
   </div>
 </header>
+
+<!-- ═══════════════ MOBILE DRAWER & BACKDROP (SYSTEMATIC & UNTRAPPED) ═══════════════ -->
+<div class="drawer-backdrop" id="drawerBackdrop"></div>
+<aside class="mobile-drawer" id="mobileDrawer" aria-label="Mobile Navigation Drawer">
+  <div class="drawer-head">
+    <a class="drawer-brand" href="#home" aria-label="Luxe Wave Home">
+      <img src="assets/logo.png" alt="Luxe Wave" width="130" height="31">
+    </a>
+    <div class="drawer-actions">
+      <button type="button" class="lang-btn lang-btn--sm" id="drawerLangToggle" aria-label="Switch Language">
+        <span class="lang-text">🇸🇦 العربية</span>
+      </button>
+      <button type="button" class="drawer-close" id="drawerClose" aria-label="Close menu">&times;</button>
+    </div>
+  </div>
+
+  <div class="drawer-body">
+    <ul class="drawer-links" id="drawerLinks">
+      <li><a href="#about"><span class="d-icon">🏢</span> <span class="d-text" id="dLinkAbout">About Luxe Wave</span></a></li>
+      <li><a href="#categories"><span class="d-icon">🛏️</span> <span class="d-text" id="dLinkSupply">What We Supply (200+ SKUs)</span></a></li>
+      <li><a href="#mattresses"><span class="d-icon">🛌</span> <span class="d-text" id="dLinkMatt">Contract Hotel Mattresses</span></a></li>
+      <li><a href="#holysites" class="drawer-holy"><span class="d-icon">🕋</span> <span class="d-text" id="dLinkHoly">Holy Sites Protocol (Makkah &amp; Madinah)</span></a></li>
+      <li><a href="#simulator"><span class="d-icon">⚡</span> <span class="d-text" id="dLinkCalc">1-PO Procurement Simulator</span></a></li>
+      <li><a href="#why"><span class="d-icon">✦</span> <span class="d-text" id="dLinkWhy">Why Choose Luxe Wave</span></a></li>
+      <li><a href="#compliance"><span class="d-icon">🛡️</span> <span class="d-text" id="dLinkComp">SFDA &amp; SASO Compliance</span></a></li>
+      <li><a href="#contact"><span class="d-icon">📞</span> <span class="d-text" id="dLinkContact">Direct Procurement &amp; RFP</span></a></li>
+      <li><a href="https://8k6ikq-g6.myshopify.com/" target="_blank" rel="noopener"><span class="d-icon">🛒</span> <span class="d-text" id="dLinkShop">Wholesale Online Store</span></a></li>
+    </ul>
+
+    <div class="drawer-cta-box">
+      <div class="drawer-cta-title" id="dCtaTitle">Urgent Restock Desk</div>
+      <p class="drawer-cta-sub" id="dCtaSub">Direct 24h hospitality buffer dispatch for KSA &amp; Holy Sites properties.</p>
+      <a class="btn btn--gold btn--wa" id="dWaBtn" href="https://wa.me/966574268856?text=Salam%20Luxe%20Wave%2C%20I%20would%20like%20a%20quotation%20for%20our%20property." target="_blank" rel="noopener" style="width:100%; justify-content:center;">
+        <span>💬</span> <span>WhatsApp Procurement</span>
+      </a>
+      <a class="btn btn--outline" id="dStoreBtn" href="https://8k6ikq-g6.myshopify.com/" target="_blank" rel="noopener" style="width:100%; justify-content:center; margin-top:8px;">
+        Browse Store Online
+      </a>
+    </div>
+  </div>
+</aside>
 
 <!-- ═══════════════ HERO ═══════════════ -->
 <section class="hero" id="home">
@@ -1386,22 +1587,275 @@ footer.foot{background:#08122A;color:var(--tx-inv-2);padding:70px 0 28px;border-
 <!-- main site behaviour -->
 <script>
 // ─── NAVBAR SCROLL ───
+// ─── MOBILE DRAWER & NAVBAR ───
 const navbar = document.getElementById('navbar');
 const navToggle = document.getElementById('navToggle');
-const navLinks = document.getElementById('navLinks');
+const mobileDrawer = document.getElementById('mobileDrawer');
+const drawerBackdrop = document.getElementById('drawerBackdrop');
+const drawerClose = document.getElementById('drawerClose');
 
 window.addEventListener('scroll', () => {
-  navbar.classList.toggle('scrolled', window.scrollY > 60);
+  navbar.classList.toggle('scrolled', window.scrollY > 50);
 });
 
-navToggle.addEventListener('click', () => {
-  navLinks.classList.toggle('open');
+function openDrawer() {
+  if (mobileDrawer) mobileDrawer.classList.add('open');
+  if (drawerBackdrop) drawerBackdrop.classList.add('open');
+  if (navToggle) {
+    navToggle.classList.add('open');
+    navToggle.setAttribute('aria-expanded', 'true');
+  }
+  document.body.style.overflow = 'hidden';
+}
+
+function closeDrawer() {
+  if (mobileDrawer) mobileDrawer.classList.remove('open');
+  if (drawerBackdrop) drawerBackdrop.classList.remove('open');
+  if (navToggle) {
+    navToggle.classList.remove('open');
+    navToggle.setAttribute('aria-expanded', 'false');
+  }
+  document.body.style.overflow = '';
+}
+
+if (navToggle) {
+  navToggle.addEventListener('click', (e) => {
+    e.stopPropagation();
+    if (mobileDrawer && mobileDrawer.classList.contains('open')) {
+      closeDrawer();
+    } else {
+      openDrawer();
+    }
+  });
+}
+
+if (drawerClose) drawerClose.addEventListener('click', closeDrawer);
+if (drawerBackdrop) drawerBackdrop.addEventListener('click', closeDrawer);
+
+// Close on link click
+document.querySelectorAll('#drawerLinks a, .desktop-nav a').forEach(link => {
+  link.addEventListener('click', closeDrawer);
 });
 
-// Close nav on link click
-document.querySelectorAll('.nav-links a').forEach(link => {
-  link.addEventListener('click', () => navLinks.classList.remove('open'));
-});
+// ─── BILINGUAL TRANSLATION ENGINE (EN / AR) ───
+const langToggle = document.getElementById('langToggle');
+const drawerLangToggle = document.getElementById('drawerLangToggle');
+
+const translations = {
+  en: {
+    langBtn: "🇸🇦 العربية",
+    drawerLangBtn: "🇸🇦 العربية",
+    announce: 'Wholesale, bulk &amp; private-label supply for hotels across Saudi Arabia — <b>WhatsApp +966 57 426 8856</b> · <a href="https://8k6ikq-g6.myshopify.com/" target="_blank" rel="noopener">Shop online</a>',
+    navQuote: "Request a Quote",
+    navAbout: "About",
+    navSupply: "What We Supply",
+    navMatt: "Mattresses",
+    navHoly: "Holy Sites Protocol",
+    navCalc: "1-PO Calculator",
+    navWhy: "Why Us",
+    navComp: "Compliance",
+    navContact: "Contact",
+    navShop: "Shop Store",
+    
+    dAbout: "About Luxe Wave",
+    dSupply: "What We Supply (200+ SKUs)",
+    dMatt: "Contract Hotel Mattresses",
+    dHoly: "Holy Sites Protocol (Makkah & Madinah)",
+    dCalc: "1-PO Procurement Simulator",
+    dWhy: "Why Choose Luxe Wave",
+    dComp: "SFDA & SASO Compliance",
+    dContact: "Direct Procurement & RFP",
+    dShop: "Wholesale Online Store",
+    dCtaTitle: "Urgent Restock Desk",
+    dCtaSub: "Direct 24h hospitality buffer dispatch for KSA & Holy Sites properties.",
+    dWaBtn: "WhatsApp Procurement",
+    dStoreBtn: "Browse Store Online",
+
+    heroKicker: "Hotel Amenities · Saudi Arabia",
+    heroH1: "Where Every <em>Guest</em> Sleeps Better.",
+    heroSub: "Premium bed &amp; bath linen, mattresses and 200+ hotel essentials — one certified supplier, delivering to 135+ properties across the Kingdom.",
+    heroSampleBtn: "Request a Sample Presentation",
+    heroExploreBtn: "Explore Categories",
+    heroShopBtn: "Shop Online",
+
+    stripRiyadh: "✦ Riyadh",
+    stripJeddah: "✦ Jeddah",
+    stripMakkah: "✦ Makkah",
+    stripMadinah: "✦ Madinah",
+    stripDammam: "✦ Dammam",
+    stripKhobar: "✦ Al Khobar",
+    stripAll: "✦ Serving all regions of the Kingdom",
+
+    holyEyebrow: "Holy Sites Logistics & Turnaround Protocol",
+    holyH2: "Zero-Downtime Hospitality Supply for Makkah & Madinah",
+    holyLead: "Engineered specifically for the intense guest churn of Umrah and Hajj seasons. SFDA and SASO certified hygiene standards, 1-PO consolidated invoicing, and 24-hour emergency buffer stock dispatched from our Western Province supply hub.",
+
+    calcEyebrow: "Interactive B2B Procurement Simulator",
+    calcH2: "Stop Multi-Vendor Churn. Calculate Instant 1-PO Velocity.",
+    calcLead: "Tap your property location and room capacity below to instantly simulate monthly waste eliminated, emergency buffer speed, and custom sample box allocation."
+  },
+  ar: {
+    langBtn: "🇬🇧 English",
+    drawerLangBtn: "🇬🇧 English",
+    announce: 'توريد الجملة والعلامات الخاصة للفنادق في المملكة العربية السعودية — <b>واتساب ٩٦٦٥٧٤٢٦٨٨٥٦+</b> · <a href="https://8k6ikq-g6.myshopify.com/" target="_blank" rel="noopener">المتجر الإلكتروني</a>',
+    navQuote: "طلب تسعيرة فورية",
+    navAbout: "من نحن",
+    navSupply: "المنتجات والتوريدات",
+    navMatt: "مراتب الفنادق",
+    navHoly: "بروتوكول الحرمين الشريفين",
+    navCalc: "حاسبة التوريد الموحد",
+    navWhy: "لماذا تختارنا",
+    navComp: "الاعتمادات والمطابقة",
+    navContact: "تواصل معنا",
+    navShop: "متجر الجملة",
+
+    dAbout: "عن لوكس ويف للتوريدات",
+    dSupply: "المنتجات والتوريدات (+٢٠٠ صنف)",
+    dMatt: "مراتب الفنادق المعتمدة",
+    dHoly: "بروتوكول الحرمين (مكة المكرمة والمدينة)",
+    dCalc: "حاسبة مشتريات التوريد الموحد",
+    dWhy: "لماذا تختار لوكس ويف؟",
+    dComp: "شهادات هيئة الغذاء والدواء والمواصفات",
+    dContact: "التواصل المباشر وطلبات التسعير",
+    dShop: "متجر الجملة الإلكتروني",
+    dCtaTitle: "مكتب التوريد الفوري للطوارئ",
+    dCtaSub: "تجهيز فوري لمخزون الطوارئ خلال ٢٤ ساعة لكافة فنادق المملكة ومواسم العمرة والحج.",
+    dWaBtn: "مكتب المشتريات عبر واتساب",
+    dStoreBtn: "تصفح المتجر أونلاين",
+
+    heroKicker: "تجهيزات ومستلزمات الفنادق · المملكة العربية السعودية",
+    heroH1: "حيث ينعم كل <em>نزيل</em> بنوم أرقى.",
+    heroSub: "مفروشات وبياضات أسرة وحمامات فاخرة، مراتب معتمدة وأكثر من ٢٠٠ صنف فندقي — مورد معتمد وموثوق لأكثر من ١٣٥ فندقاً ومنشأة في كافة مدن المملكة.",
+    heroSampleBtn: "طلب صندوق العينات المجانية",
+    heroExploreBtn: "استكشف المنتجات والتصنيفات",
+    heroShopBtn: "المتجر الإلكتروني",
+
+    stripRiyadh: "✦ الرياض",
+    stripJeddah: "✦ جدة",
+    stripMakkah: "✦ مكة المكرمة",
+    stripMadinah: "✦ المدينة المنورة",
+    stripDammam: "✦ الدمام",
+    stripKhobar: "✦ الخبر",
+    stripAll: "✦ تغطية شاملة لكافة مناطق المملكة",
+
+    holyEyebrow: "الخدمات اللوجستية وسرعة دوران الغرف بمكة المكرمة والمدينة المنورة",
+    holyH2: "بروتوكول التوريد الفندقي السريع بدون توقف لمواسم العمرة والحج",
+    holyLead: "سلسلة إمداد مصممة خصيصاً لمواكبة الكثافة التشغيلية وسرعة إشغال الغرف. مطابقة لاشتراطات هيئة الغذاء والدواء (SFDA) والمواصفات السعودية (SASO)، فواتير موحدة (1-PO)، ومخزون طوارئ احتياطي يُسلَّم لمنشأتكم خلال ٢٤ ساعة فقط.",
+
+    calcEyebrow: "حاسبة مشتريات الضيافة التفاعلية",
+    calcH2: "أوقف هدر تعدد الموردين. احسب توفير وسرعة أمر الشراء الموحد (1-PO)",
+    calcLead: "اختر موقع منشأتك وعدد الغرف لحساب التوفير المالي السنوي وسرعة تسليم مخزون الطوارئ وحجز صندوق العينات الخاص بك."
+  }
+};
+
+let currentLang = localStorage.getItem('luxewave_lang') || 'en';
+
+function applyLanguage(lang) {
+  currentLang = lang;
+  localStorage.setItem('luxewave_lang', lang);
+  document.documentElement.lang = lang === 'ar' ? 'ar' : 'en-SA';
+  document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+
+  const t = translations[lang];
+  if (!t) return;
+
+  if (langToggle) {
+    const lt = langToggle.querySelector('.lang-text');
+    if (lt) lt.textContent = t.langBtn;
+  }
+  if (drawerLangToggle) {
+    const dlt = drawerLangToggle.querySelector('.lang-text');
+    if (dlt) dlt.textContent = t.drawerLangBtn;
+  }
+
+  const navQuote = document.getElementById('navQuoteBtn');
+  if (navQuote) navQuote.textContent = t.navQuote;
+  
+  const setTxt = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
+
+  setTxt('navLinkAbout', t.navAbout);
+  setTxt('navLinkSupply', t.navSupply);
+  setTxt('navLinkMatt', t.navMatt);
+  setTxt('navLinkHoly', t.navHoly);
+  setTxt('navLinkCalc', t.navCalc);
+  setTxt('navLinkWhy', t.navWhy);
+  setTxt('navLinkComp', t.navComp);
+  setTxt('navLinkContact', t.navContact);
+  setTxt('navLinkShop', t.navShop);
+
+  setTxt('dLinkAbout', t.dAbout);
+  setTxt('dLinkSupply', t.dSupply);
+  setTxt('dLinkMatt', t.dMatt);
+  setTxt('dLinkHoly', t.dHoly);
+  setTxt('dLinkCalc', t.dCalc);
+  setTxt('dLinkWhy', t.dWhy);
+  setTxt('dLinkComp', t.dComp);
+  setTxt('dLinkContact', t.dContact);
+  setTxt('dLinkShop', t.dShop);
+  setTxt('dCtaTitle', t.dCtaTitle);
+  setTxt('dCtaSub', t.dCtaSub);
+  setTxt('dStoreBtn', t.dStoreBtn);
+
+  const announceSpan = document.querySelector('.announce .wrap');
+  if (announceSpan) announceSpan.innerHTML = t.announce;
+
+  const kicker = document.querySelector('.hero-kicker');
+  if (kicker) kicker.textContent = t.heroKicker;
+  const heroH1 = document.querySelector('.hero h1');
+  if (heroH1) heroH1.innerHTML = t.heroH1;
+  const heroSub = document.querySelector('.hero-sub');
+  if (heroSub) heroSub.innerHTML = t.heroSub;
+
+  const heroBtns = document.querySelectorAll('.hero .btn-row .btn');
+  if (heroBtns.length >= 3) {
+    heroBtns[0].textContent = t.heroSampleBtn;
+    heroBtns[1].textContent = t.heroExploreBtn;
+    heroBtns[2].textContent = t.heroShopBtn;
+  }
+
+  const stripLis = document.querySelectorAll('.strip li');
+  if (stripLis.length >= 7) {
+    stripLis[0].textContent = t.stripRiyadh;
+    stripLis[1].textContent = t.stripJeddah;
+    stripLis[2].textContent = t.stripMakkah;
+    stripLis[3].textContent = t.stripMadinah;
+    stripLis[4].textContent = t.stripDammam;
+    stripLis[5].textContent = t.stripKhobar;
+    stripLis[6].textContent = t.stripAll;
+  }
+
+  const holySec = document.getElementById('holysites');
+  if (holySec) {
+    const ey = holySec.querySelector('.eyebrow');
+    if (ey) ey.textContent = t.holyEyebrow;
+    const h2 = holySec.querySelector('.h-sec');
+    if (h2) h2.textContent = t.holyH2;
+    const lead = holySec.querySelector('.lead');
+    if (lead) lead.textContent = t.holyLead;
+  }
+
+  const simSec = document.getElementById('simulator');
+  if (simSec) {
+    const ey = simSec.querySelector('.eyebrow');
+    if (ey) ey.textContent = t.calcEyebrow;
+    const h2 = simSec.querySelector('.h-sec');
+    if (h2) h2.textContent = t.calcH2;
+    const lead = simSec.querySelector('.lead');
+    if (lead) lead.textContent = t.calcLead;
+  }
+}
+
+function toggleLanguage() {
+  const nextLang = currentLang === 'en' ? 'ar' : 'en';
+  applyLanguage(nextLang);
+}
+
+if (langToggle) langToggle.addEventListener('click', toggleLanguage);
+if (drawerLangToggle) drawerLangToggle.addEventListener('click', toggleLanguage);
+
+if (currentLang === 'ar') {
+  applyLanguage('ar');
+}
 
 // ─── SMOOTH REVEAL ON SCROLL ───
 const revealElements = document.querySelectorAll('.reveal');

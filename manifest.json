@@ -2,8 +2,8 @@
   "name": "LuxeWave B2B Hospitality Procurement",
   "short_name": "LuxeWave KSA",
   "description": "Wholesale 1-PO Hotel Supplies, Contract Bedding & Amenities for KSA Luxury & Holy Sites Properties",
-  "start_url": "/?utm_source=pwa_app",
-  "scope": "/",
+  "start_url": "./?utm_source=pwa_app",
+  "scope": "./",
   "display": "standalone",
   "orientation": "portrait-primary",
   "background_color": "#0B1B3D",
@@ -36,7 +36,7 @@
       "name": "Holy Sites Procurement",
       "short_name": "Holy Sites",
       "description": "Rapid Hajj & Umrah Hotel Replenishment",
-      "url": "/#holysites",
+      "url": "./#holysites",
       "icons": [{ "src": "assets/icon-192.png", "sizes": "192x192" }]
     },
     {

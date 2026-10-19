@@ -1,19 +1,19 @@
 // LuxeWave KSA Service Worker (PWA Offline & Caching Engine)
-const CACHE_NAME = 'luxewave-b2b-v1.1';
+const CACHE_NAME = 'luxewave-b2b-v1.2';
 const STATIC_ASSETS = [
-  '/',
-  '/index.html',
-  '/manifest.json',
-  '/assets/logo.png',
-  '/assets/icon-192.png',
-  '/assets/icon-512.png',
-  '/assets/og.jpg',
-  '/assets/img/hero.jpg',
-  '/assets/img/amenities.jpg',
-  '/assets/img/mattresses.jpg',
-  '/assets/img/linen.jpg',
-  '/assets/img/prayer.jpg',
-  '/assets/img/towels.jpg'
+  './',
+  './index.html',
+  './manifest.json',
+  './assets/logo.png',
+  './assets/icon-192.png',
+  './assets/icon-512.png',
+  './assets/og.jpg',
+  './assets/img/hero.jpg',
+  './assets/img/amenities.jpg',
+  './assets/img/mattresses.jpg',
+  './assets/img/linen.jpg',
+  './assets/img/prayer.jpg',
+  './assets/img/towels.jpg'
 ];
 
 self.addEventListener('install', (event) => {
@@ -58,7 +58,7 @@ self.addEventListener('fetch', (event) => {
             return cachedResponse;
           }
           if (event.request.mode === 'navigate') {
-            return caches.match('/index.html');
+            return caches.match('./index.html');
           }
         });
       })

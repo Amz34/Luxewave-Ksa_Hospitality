@@ -16,7 +16,7 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="manifest" href="/manifest.json">
+<link rel="manifest" href="./manifest.json">
 <link rel="apple-touch-icon" href="assets/icon-192.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -43,12 +43,12 @@
   --ease:cubic-bezier(.22,.61,.36,1);
 }
 *,*::before,*::after{box-sizing:border-box}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-body{margin:0;font-family:var(--sans);font-weight:400;font-size:16.5px;line-height:1.7;color:var(--tx);background:var(--white);overflow-x:hidden}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;overflow-x:hidden;max-width:100vw}
+body{margin:0;font-family:var(--sans);font-weight:400;font-size:16.5px;line-height:1.7;color:var(--tx);background:var(--white);overflow-x:hidden;max-width:100vw;width:100%;position:relative}
 img{max-width:100%;display:block;height:auto}
 a{color:inherit;text-decoration:none}
-h1,h2,h3,h4{font-family:var(--serif);font-weight:700;line-height:1.12;letter-spacing:-.01em;margin:0}
-p{margin:0}
+h1,h2,h3,h4{font-family:var(--serif);font-weight:700;line-height:1.12;letter-spacing:-.01em;margin:0;overflow-wrap:break-word}
+p{margin:0;overflow-wrap:break-word}
 .wrap{width:100%;max-width:var(--max);margin:0 auto;padding:0 24px}
 .section{padding:104px 0;position:relative}
 .section--cream{background:var(--cream)}
@@ -113,7 +113,7 @@ h2.h-sec{font-size:clamp(30px,3.6vw,50px);margin:0 0 18px}
 
 /* ---------- hero ---------- */
 .hero{position:relative;min-height:92vh;display:flex;align-items:center;overflow:hidden;background:var(--ink);padding:150px 0 70px}
-.hero-bg{position:absolute;inset:0;z-index:0}
+.hero-bg{position:absolute;inset:0;z-index:0;overflow:hidden}
 .hero-bg video{width:100%;height:100%;object-fit:cover;transform:scale(1.06);display:block}
 .hero-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(95deg,rgba(8,18,42,.94) 0%,rgba(8,18,42,.86) 34%,rgba(8,18,42,.55) 62%,rgba(8,18,42,.34) 100%)}
 .hero-inner{position:relative;z-index:2;width:100%}
@@ -312,410 +312,373 @@ footer.foot{background:#08122A;color:var(--tx-inv-2);padding:70px 0 28px;border-
 .reveal{opacity:0;transform:translateY(22px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
 .reveal.visible{opacity:1;transform:none}
 
+/* ═══════════════ NEUROMARKETING & SIMULATOR ═══════════════ */
+.neuro-box {
+  background: radial-gradient(circle at 50% 0%, #1B3059 0%, #0B1B3D 100%);
+  border: 1px solid rgba(201, 164, 92, 0.35);
+  border-radius: 16px;
+  padding: 38px 30px;
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.45), 0 0 40px rgba(201, 164, 92, 0.12);
+  margin-top: 32px;
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+.neuro-box::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, transparent, #C9A45C, #E7D3A1, #C9A45C, transparent);
+}
+.tap-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 14px 0 24px;
+}
+.tap-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: #E8ECF5;
+  padding: 11px 18px;
+  border-radius: 30px;
+  font-family: var(--sans);
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.22s cubic-bezier(0.2, 0.8, 0.2, 1);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  user-select: none;
+  max-width: 100%;
+}
+.tap-btn:hover {
+  background: rgba(201, 164, 92, 0.18);
+  border-color: #C9A45C;
+  color: #fff;
+}
+.tap-btn:active {
+  transform: scale(0.97);
+}
+.tap-btn.active {
+  background: linear-gradient(135deg, #C9A45C 0%, #A5823C 100%);
+  color: #0B1B3D;
+  border-color: #E7D3A1;
+  box-shadow: 0 4px 18px rgba(201, 164, 92, 0.35);
+  font-weight: 700;
+}
+.calc-results-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  background: rgba(11, 27, 61, 0.65);
+  border: 1px solid rgba(201, 164, 92, 0.22);
+  border-radius: 12px;
+  padding: 20px;
+  margin: 24px 0;
+}
+.calc-card {
+  text-align: center;
+  padding: 8px;
+  min-width: 0;
+}
+.calc-label {
+  font-size: 11.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(232, 236, 245, 0.7);
+  margin-bottom: 6px;
+}
+.calc-val {
+  font-family: var(--serif);
+  font-size: 24px;
+  font-weight: 800;
+  color: #E7D3A1;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+}
+.calc-note {
+  font-size: 11.5px;
+  color: rgba(255, 255, 255, 0.6);
+  margin-top: 4px;
+}
+
+/* ═══════════════ HOLY SITES SECTION ═══════════════ */
+.holy-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 22px;
+  margin-top: 36px;
+}
+.holy-card {
+  background: #ffffff;
+  border: 1px solid rgba(11, 27, 61, 0.08);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(11, 27, 61, 0.05);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.25s var(--ease), box-shadow 0.25s;
+}
+.holy-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 36px rgba(11, 27, 61, 0.12);
+}
+.holy-card-img-wrap {
+  width: 100%;
+  height: 200px;
+  position: relative;
+  overflow: hidden;
+  background: #0B1B3D;
+}
+.holy-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s var(--ease);
+}
+.holy-card:hover .holy-card-img {
+  transform: scale(1.05);
+}
+.holy-card-body {
+  padding: 22px 18px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.holy-badge {
+  display: inline-block;
+  align-self: flex-start;
+  background: rgba(201, 164, 92, 0.15);
+  color: #8c6a23;
+  border: 1px solid rgba(201, 164, 92, 0.35);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 4px;
+  margin-bottom: 12px;
+}
+.holy-card-title {
+  font-family: var(--serif);
+  font-size: 20px;
+  line-height: 1.3;
+  color: var(--ink);
+  margin: 0 0 10px;
+}
+.holy-card-desc {
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: var(--tx-muted);
+  margin: 0 0 16px;
+  flex: 1;
+}
+.holy-card-specs {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border-top: 1px solid rgba(11, 27, 61, 0.08);
+  padding-top: 12px;
+}
+.holy-card-specs li {
+  font-size: 12.5px;
+  color: var(--tx);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+.holy-card-specs li span {
+  color: #1FA855;
+  font-weight: 700;
+}
+.holy-cta {
+  margin-top: 36px;
+}
+.holy-cta-box {
+  background: linear-gradient(135deg, #0B1B3D 0%, #16294F 100%);
+  border: 1px solid rgba(201, 164, 92, 0.35);
+  border-radius: 14px;
+  padding: 26px 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  text-align: left;
+  box-shadow: 0 15px 40px rgba(11, 27, 61, 0.2);
+}
+
+/* ═══════════════ PWA FLOATING BANNER ═══════════════ */
+.pwa-banner {
+  position: fixed;
+  bottom: 24px;
+  left: 24px;
+  z-index: 99;
+  background: rgba(11, 27, 61, 0.95);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(201, 164, 92, 0.4);
+  border-radius: 50px;
+  padding: 8px 18px 8px 10px;
+  display: none;
+  align-items: center;
+  gap: 14px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+  animation: slideUp 0.4s var(--ease);
+}
+@keyframes slideUp {
+  from { transform: translateY(100%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+.pwa-banner img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid #C9A45C;
+}
+.pwa-text {
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+}
+.pwa-text span {
+  display: block;
+  font-size: 11px;
+  color: #C9A45C;
+  font-weight: 400;
+}
+.pwa-close {
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  font-size: 16px;
+  padding: 4px 8px;
+}
+.pwa-close:hover { color: #fff; }
+
 /* ---------- responsive ---------- */
 @media (max-width:1100px){
   .cat-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
   .stats-row{grid-template-columns:repeat(2,minmax(0,1fr));gap:34px}
   .steps,.cert-cards{grid-template-columns:repeat(2,minmax(0,1fr))}
   .foot-grid{grid-template-columns:1fr 1fr;gap:34px}
+  .holy-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media (max-width:900px){
-  .section{padding:76px 0}
-  .about-grid,.why-grid,.matt-feature,.contact-grid,.pl-inner{grid-template-columns:1fr;gap:38px}
+  .section{padding:70px 0}
+  .about-grid,.why-grid,.matt-feature,.contact-grid,.pl-inner{grid-template-columns:1fr;gap:36px}
   .why-media{order:2}
   .matt-grid,.quotes,.form-row{grid-template-columns:1fr}
-  .hero{min-height:auto;padding:126px 0 116px}
+  .hero{min-height:auto;padding:120px 0 110px}
   .hero-bg::after{background:linear-gradient(180deg,rgba(8,18,42,.90) 0%,rgba(8,18,42,.84) 42%,rgba(8,18,42,.93) 100%)}
   .hero h1{max-width:none}
   .hero-trust{gap:12px 22px}
   .about-badge{right:14px;bottom:-18px}
-  .nav-links{position:fixed;top:0;right:0;bottom:0;width:min(320px,86vw);background:var(--ink);flex-direction:column;align-items:flex-start;gap:6px;padding:96px 26px 30px;transform:translateX(100%);transition:transform .4s var(--ease);box-shadow:-20px 0 60px rgba(0,0,0,.4)}
-  .nav-links.open{transform:none}
+  .nav-links{
+    position:fixed;
+    top:0;
+    right:0;
+    bottom:0;
+    width:min(320px,86vw);
+    background:var(--ink);
+    flex-direction:column;
+    align-items:flex-start;
+    gap:6px;
+    padding:96px 26px 30px;
+    transform:translateX(100%);
+    visibility:hidden;
+    opacity:0;
+    pointer-events:none;
+    transition:transform .35s var(--ease), visibility .35s, opacity .35s;
+    box-shadow:-20px 0 60px rgba(0,0,0,.4);
+    z-index:1000;
+    overflow-y:auto;
+  }
+  .nav-links.open{
+    transform:translateX(0);
+    visibility:visible;
+    opacity:1;
+    pointer-events:auto;
+  }
   .nav-links a{font-size:16px;width:100%;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.08)}
-  .nav-toggle{display:flex}
+  .nav-toggle{display:flex; z-index:1001;}
   .nav-right .btn{display:none}
   .float-btns{bottom:auto;top:50%;transform:translateY(-50%);left:14px}
+  .calc-results-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .holy-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
+
 @media (max-width:640px){
-  body{font-size:16px}
-  .wrap{padding:0 18px}
+  html, body {
+    overflow-x: hidden;
+    width: 100%;
+    position: relative;
+  }
+  body{font-size:15px; -webkit-text-size-adjust:100%;}
+  .wrap{padding:0 16px; width:100%; box-sizing:border-box;}
   .cat-grid,.steps,.cert-cards,.stats-row{grid-template-columns:1fr}
-  .section{padding:62px 0}
-  .hero{padding-bottom:104px}
-  .float-wa{width:50px;height:50px;left:16px;bottom:16px}
-  .chat-launcher{width:54px;height:54px;right:16px;bottom:16px}
-  .hero{padding:118px 0 104px}
-  .hero-sub{font-size:16.5px}
-  .hero-sound{right:14px;bottom:14px;padding:9px 13px;font-size:11.5px}
-  .strip li{font-size:11.5px;letter-spacing:.14em}
-  .chat-window{right:10px;left:10px;bottom:10px;width:auto}
-  .chat-launcher{right:16px;bottom:16px}
-  .chat-prechat{right:16px;left:16px;bottom:86px}
+  .section{padding:52px 0}
+  .hero{padding:106px 0 90px}
+  .hero h1{font-size:29px; line-height:1.24;}
+  .hero-sub{font-size:15px; line-height:1.55;}
+  .h-sec{font-size:24px; line-height:1.3;}
+  .btn-row{flex-direction:column; align-items:stretch; gap:10px; width:100%;}
+  .btn{
+    white-space:normal;
+    text-align:center;
+    max-width:100%;
+    width:100%;
+    padding:13px 20px;
+    font-size:14px;
+    box-sizing:border-box;
+    word-break:normal;
+    overflow-wrap:break-word;
+  }
+  .hero-trust{flex-direction:column; align-items:flex-start; gap:8px;}
+  .float-wa{width:46px;height:46px;left:14px;bottom:14px; z-index:85;}
+  .float-wa svg{width:24px;height:24px;}
+  .chat-launcher{width:48px;height:48px;right:14px;bottom:14px; z-index:85;}
+  .hero-sound{right:12px;bottom:12px;padding:7px 11px;font-size:11px}
+  .strip{padding:14px 0;}
+  .strip ul{gap:8px 18px;}
+  .strip li{font-size:11px;letter-spacing:.1em}
+  .chat-window{right:8px;left:8px;bottom:8px;width:auto; max-width:calc(100vw - 16px);}
+  .chat-prechat{right:12px;left:12px;bottom:76px; max-width:calc(100vw - 24px);}
   .foot-grid{grid-template-columns:1fr}
-  .quote p{font-size:17.5px}
+  .quote p{font-size:16.5px}
+  .announce{font-size:11.5px; padding:7px 12px; line-height:1.4;}
+
+  .neuro-box{padding:20px 14px; margin-top:20px; border-radius:12px;}
+  .tap-group{flex-direction:column; gap:8px;}
+  .tap-btn{width:100%; justify-content:flex-start; padding:10px 14px; font-size:13px; white-space:normal;}
+  .calc-results-grid{grid-template-columns:1fr; gap:10px; padding:14px 10px;}
+  .calc-val{font-size:22px;}
+  #simulator .center .btn{width:100%; margin:6px 0 !important; box-sizing:border-box; white-space:normal;}
+
+  .holy-grid{grid-template-columns:1fr !important; gap:16px;}
+  .holy-card{width:100%;}
+  .holy-card-img-wrap{height:180px;}
+  .holy-card-body{padding:18px 16px;}
+  .holy-card-title{font-size:18.5px;}
+  .holy-cta-box{flex-direction:column; text-align:center; padding:20px 16px;}
+  .holy-cta-btns{width:100%;}
+  .holy-cta-btns .btn{width:100%;}
+
+  .pwa-banner{left:12px; right:12px; bottom:12px; border-radius:14px; padding:10px 14px; gap:10px; max-width:calc(100vw - 24px);}
+  .cinfo li{flex-direction:column; gap:4px; align-items:flex-start}
+  .cinfo .cl,.cinfo .k{min-width:0; display:block}
+  .cinfo a,.cinfo span{word-break:break-word; overflow-wrap:break-word}
+  .form-card{padding:20px 14px}
+  .hero-bg video{transform:none}
 }
 @media (prefers-reduced-motion:reduce){
   .reveal{opacity:1;transform:none}
   html{scroll-behavior:auto}
 }
-
-
-
-/* ═══════════════ NEUROMARKETING & PWA STYLES ═══════════════ */
-.neuro-box {
-  background: radial-gradient(circle at 50% 0%, #1B3059 0%, #0B1B3D 100%);
-  border: 1px solid rgba(201, 164, 92, 0.35);
-  border-radius: 16px;
-  padding: 44px 36px;
-  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.45), 0 0 40px rgba(201, 164, 92, 0.12);
-  margin-top: 36px;
-  position: relative;
-  overflow: hidden;
-}
-.neuro-box::before {
-  content: "";
-  position: absolute;
-  top: 0; left: 0; right: 0; height: 3px;
-  background: linear-gradient(90deg, transparent, #C9A45C, #E7D3A1, #C9A45C, transparent);
-}
-.tap-group {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin: 18px 0 28px;
-}
-.tap-btn {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  color: #E8ECF5;
-  padding: 12px 22px;
-  border-radius: 30px;
-  font-family: var(--sans);
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.22s cubic-bezier(0.2, 0.8, 0.2, 1);
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  user-select: none;
-}
-.tap-btn:hover {
-  background: rgba(201, 164, 92, 0.18);
-  border-color: #C9A45C;
-  transform: translateY(-2px);
-  color: #fff;
-}
-.tap-btn:active {
-  transform: scale(0.96);
-}
-.tap-btn.active {
-  background: linear-gradient(135deg, #C9A45C 0%, #A5823C 100%);
-  color: #0B1B3D;
-  border-color: #E7D3A1;
-  box-shadow: 0 4px 20px rgba(201, 164, 92, 0.4);
-  font-weight: 700;
-}
-.calc-results-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
-  background: rgba(11, 27, 61, 0.65);
-  border: 1px solid rgba(201, 164, 92, 0.22);
-  border-radius: 12px;
-  padding: 24px;
-  margin: 28px 0;
-}
-.calc-card {
-  text-align: center;
-  padding: 10px;
-}
-.calc-label {
-  font-size: 12px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: rgba(232, 236, 245, 0.7);
-  margin-bottom: 6px;
-}
-.calc-val {
-  font-family: var(--serif);
-  font-size: 26px;
-  font-weight: 800;
-  color: #E7D3A1;
-  text-shadow: 0 2px 10px rgba(0,0,0,0.5);
-}
-.calc-note {
-  font-size: 12px;
-  color: rgba(255, 255, 255, 0.6);
-  margin-top: 4px;
-}
-
-/* Holy Sites Section */
-.holy-card {
-  background: #ffffff;
-  border: 1px solid rgba(11, 27, 61, 0.08);
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 10px 30px rgba(11, 27, 61, 0.06);
-  transition: transform 0.3s var(--ease), box-shadow 0.3s;
-}
-.holy-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 20px 45px rgba(11, 27, 61, 0.14);
-}
-.holy-card-img {
-  width: 100%;
-  height: 220px;
-  object-fit: cover;
-}
-.holy-card-body {
-  padding: 26px 22px;
-}
-.holy-badge {
-  display: inline-block;
-  background: #0B1B3D;
-  color: #C9A45C;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  padding: 4px 10px;
-  border-radius: 4px;
-  margin-bottom: 12px;
-}
-
-/* PWA Install Floating Banner */
-.pwa-banner {
-  position: fixed;
-  bottom: 24px;
-  left: 24px;
-  z-index: 99;
-  background: rgba(11, 27, 61, 0.95);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(201, 164, 92, 0.4);
-  border-radius: 50px;
-  padding: 8px 18px 8px 10px;
-  display: none;
-  align-items: center;
-  gap: 14px;
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
-  animation: slideUp 0.4s var(--ease);
-}
-@keyframes slideUp {
-  from { transform: translateY(100%); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
-}
-.pwa-banner img {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  border: 2px solid #C9A45C;
-}
-.pwa-text {
-  color: #fff;
-  font-size: 13px;
-  font-weight: 600;
-}
-.pwa-text span {
-  display: block;
-  font-size: 11px;
-  color: #C9A45C;
-  font-weight: 400;
-}
-.pwa-close {
-  background: transparent;
-  border: none;
-  color: rgba(255, 255, 255, 0.5);
-  cursor: pointer;
-  font-size: 16px;
-  padding: 4px 8px;
-}
 .pwa-close:hover { color: #fff; }
-
-@media (max-width: 768px) {
-  .calc-results-grid { grid-template-columns: repeat(2, 1fr); }
-  .pwa-banner { left: 16px; right: 16px; border-radius: 16px; }
-}
-
 </style>
-<noscript><style>.reveal{opacity:1;transform:none}
-/* ═══════════════ NEUROMARKETING & PWA STYLES ═══════════════ */
-.neuro-box {
-  background: radial-gradient(circle at 50% 0%, #1B3059 0%, #0B1B3D 100%);
-  border: 1px solid rgba(201, 164, 92, 0.35);
-  border-radius: 16px;
-  padding: 44px 36px;
-  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.45), 0 0 40px rgba(201, 164, 92, 0.12);
-  margin-top: 36px;
-  position: relative;
-  overflow: hidden;
-}
-.neuro-box::before {
-  content: "";
-  position: absolute;
-  top: 0; left: 0; right: 0; height: 3px;
-  background: linear-gradient(90deg, transparent, #C9A45C, #E7D3A1, #C9A45C, transparent);
-}
-.tap-group {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin: 18px 0 28px;
-}
-.tap-btn {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  color: #E8ECF5;
-  padding: 12px 22px;
-  border-radius: 30px;
-  font-family: var(--sans);
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.22s cubic-bezier(0.2, 0.8, 0.2, 1);
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  user-select: none;
-}
-.tap-btn:hover {
-  background: rgba(201, 164, 92, 0.18);
-  border-color: #C9A45C;
-  transform: translateY(-2px);
-  color: #fff;
-}
-.tap-btn:active {
-  transform: scale(0.96);
-}
-.tap-btn.active {
-  background: linear-gradient(135deg, #C9A45C 0%, #A5823C 100%);
-  color: #0B1B3D;
-  border-color: #E7D3A1;
-  box-shadow: 0 4px 20px rgba(201, 164, 92, 0.4);
-  font-weight: 700;
-}
-.calc-results-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
-  background: rgba(11, 27, 61, 0.65);
-  border: 1px solid rgba(201, 164, 92, 0.22);
-  border-radius: 12px;
-  padding: 24px;
-  margin: 28px 0;
-}
-.calc-card {
-  text-align: center;
-  padding: 10px;
-}
-.calc-label {
-  font-size: 12px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: rgba(232, 236, 245, 0.7);
-  margin-bottom: 6px;
-}
-.calc-val {
-  font-family: var(--serif);
-  font-size: 26px;
-  font-weight: 800;
-  color: #E7D3A1;
-  text-shadow: 0 2px 10px rgba(0,0,0,0.5);
-}
-.calc-note {
-  font-size: 12px;
-  color: rgba(255, 255, 255, 0.6);
-  margin-top: 4px;
-}
-
-/* Holy Sites Section */
-.holy-card {
-  background: #ffffff;
-  border: 1px solid rgba(11, 27, 61, 0.08);
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 10px 30px rgba(11, 27, 61, 0.06);
-  transition: transform 0.3s var(--ease), box-shadow 0.3s;
-}
-.holy-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 20px 45px rgba(11, 27, 61, 0.14);
-}
-.holy-card-img {
-  width: 100%;
-  height: 220px;
-  object-fit: cover;
-}
-.holy-card-body {
-  padding: 26px 22px;
-}
-.holy-badge {
-  display: inline-block;
-  background: #0B1B3D;
-  color: #C9A45C;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  padding: 4px 10px;
-  border-radius: 4px;
-  margin-bottom: 12px;
-}
-
-/* PWA Install Floating Banner */
-.pwa-banner {
-  position: fixed;
-  bottom: 24px;
-  left: 24px;
-  z-index: 99;
-  background: rgba(11, 27, 61, 0.95);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(201, 164, 92, 0.4);
-  border-radius: 50px;
-  padding: 8px 18px 8px 10px;
-  display: none;
-  align-items: center;
-  gap: 14px;
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
-  animation: slideUp 0.4s var(--ease);
-}
-@keyframes slideUp {
-  from { transform: translateY(100%); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
-}
-.pwa-banner img {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  border: 2px solid #C9A45C;
-}
-.pwa-text {
-  color: #fff;
-  font-size: 13px;
-  font-weight: 600;
-}
-.pwa-text span {
-  display: block;
-  font-size: 11px;
-  color: #C9A45C;
-  font-weight: 400;
-}
-.pwa-close {
-  background: transparent;
-  border: none;
-  color: rgba(255, 255, 255, 0.5);
-  cursor: pointer;
-  font-size: 16px;
-  padding: 4px 8px;
-}
-.pwa-close:hover { color: #fff; }
-
-@media (max-width: 768px) {
-  .calc-results-grid { grid-template-columns: repeat(2, 1fr); }
-  .pwa-banner { left: 16px; right: 16px; border-radius: 16px; }
-}
-
-</style></noscript>
+<noscript><style>.reveal{opacity:1;transform:none}</style></noscript>
 </head>
 <body>
 
@@ -790,77 +753,6 @@ footer.foot{background:#08122A;color:var(--tx-inv-2);padding:70px 0 28px;border-
 </div>
 
 <!-- ═══════════════ ABOUT ═══════════════ -->
-
-<!-- ═══════════════ NEUROMARKETING 1-PO SIMULATOR ═══════════════ -->
-<section class="section section--navy" id="simulator">
-  <div class="wrap">
-    <div class="center reveal">
-      <p class="eyebrow">Interactive B2B Procurement Simulator</p>
-      <h2 class="h-sec">Stop Multi-Vendor Churn. Calculate Instant 1-PO Velocity.</h2>
-      <p class="lead">Tap your property location and room capacity below to instantly simulate monthly waste eliminated, emergency buffer speed, and custom sample box allocation.</p>
-    </div>
-
-    <div class="neuro-box reveal">
-      <div style="font-size:13px; letter-spacing:0.12em; text-transform:uppercase; color:var(--gold-lt); font-weight:700; margin-bottom:8px;">
-        Step 1: Select Property Region & Hospitality Workload
-      </div>
-      <div class="tap-group" id="regionTaps">
-        <button type="button" class="tap-btn active" data-region="holysites" data-label="Makkah & Madinah (Holy Sites)">
-          <span>🕋</span> Makkah &amp; Madinah (Holy Sites • High Churn)
-        </button>
-        <button type="button" class="tap-btn" data-region="capital" data-label="Riyadh & Jeddah (Luxury)">
-          <span>🏙️</span> Riyadh &amp; Jeddah (Luxury 4★/5★ &amp; Corporate)
-        </button>
-        <button type="button" class="tap-btn" data-region="resorts" data-label="Red Sea & Eastern Province">
-          <span>🌴</span> Red Sea &amp; Eastern Province (Boutique &amp; Extended Stay)
-        </button>
-      </div>
-
-      <div style="font-size:13px; letter-spacing:0.12em; text-transform:uppercase; color:var(--gold-lt); font-weight:700; margin-bottom:8px;">
-        Step 2: Select Property Room Count
-      </div>
-      <div class="tap-group" id="roomTaps">
-        <button type="button" class="tap-btn" data-rooms="60">60 Keys (Boutique)</button>
-        <button type="button" class="tap-btn active" data-rooms="150">150 Keys (Mid-Scale)</button>
-        <button type="button" class="tap-btn" data-rooms="350">350 Keys (Full Service)</button>
-        <button type="button" class="tap-btn" data-rooms="750">750+ Keys (Pilgrimage Mega-Hotel)</button>
-      </div>
-
-      <div class="calc-results-grid">
-        <div class="calc-card">
-          <div class="calc-label">Multi-Vendor Waste Eliminated</div>
-          <div class="calc-val" id="calcSavings">SAR 38,400</div>
-          <div class="calc-note">Annual PO processing & logistics overhead</div>
-        </div>
-        <div class="calc-card">
-          <div class="calc-label">Emergency Replenishment</div>
-          <div class="calc-val" id="calcBuffer">24–48 Hours</div>
-          <div class="calc-note">Direct from local in-Kingdom stock</div>
-        </div>
-        <div class="calc-card">
-          <div class="calc-label">Single Invoice (1-PO) Scope</div>
-          <div class="calc-val">33 Amenities + Linen</div>
-          <div class="calc-note">SFDA & SASO verified single delivery</div>
-        </div>
-        <div class="calc-card">
-          <div class="calc-label">Housekeeping Flip Velocity</div>
-          <div class="calc-val" id="calcFlip">&lt; 8 Mins / Room</div>
-          <div class="calc-note">Via tamper-proof wall dispenser systems</div>
-        </div>
-      </div>
-
-      <div class="center" style="margin-top:24px;">
-        <a class="btn btn--gold btn--wa" id="calcWaBtn" href="https://wa.me/966574268856?text=Salam%20LuxeWave%2C%20I%20used%20the%201-PO%20Simulator%20for%20150%20rooms%20in%20Makkah%20%26%20Madinah.%20Please%20dispatch%20complimentary%20VIP%20Sample%20Box." target="_blank" rel="noopener">
-          <span>📲</span> Lock In This 1-PO Rate &amp; Request Sample Box
-        </a>
-        <a class="btn btn--outline" href="https://8k6ikq-g6.myshopify.com/" target="_blank" rel="noopener" style="margin-left:12px;">
-          Browse Wholesale Shopify Store
-        </a>
-      </div>
-    </div>
-  </div>
-</section>
-
 <section class="section section--cream" id="about">
   <div class="wrap">
     <div class="about-grid">
@@ -1035,6 +927,167 @@ footer.foot{background:#08122A;color:var(--tx-inv-2);padding:70px 0 28px;border-
         <h3>Breeze</h3>
         <p>Reliable firm support at volume pricing — the practical answer for serviced apartments and staff housing.</p>
       </article>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ HOLY SITES PROTOCOL ═══════════════ -->
+<section class="section section--light" id="holysites" style="background:#fbfbfd; border-top:1px solid rgba(11,27,61,0.06); border-bottom:1px solid rgba(11,27,61,0.06);">
+  <div class="wrap">
+    <div class="center reveal">
+      <p class="eyebrow">Holy Sites Logistics &amp; Turnaround Protocol</p>
+      <h2 class="h-sec">Zero-Downtime Hospitality Supply for Makkah &amp; Madinah</h2>
+      <p class="lead">Engineered specifically for the intense guest churn of Umrah and Hajj seasons. SFDA and SASO certified hygiene standards, 1-PO consolidated invoicing, and 24-hour emergency buffer stock dispatched from our Western Province supply hub.</p>
+    </div>
+
+    <div class="holy-grid reveal">
+      <div class="holy-card">
+        <div class="holy-card-img-wrap">
+          <img src="assets/img/linen.jpg" alt="High-turnover 100% Egyptian Cotton Bed Linen" class="holy-card-img" loading="lazy">
+        </div>
+        <div class="holy-card-body">
+          <span class="holy-badge">High-Turnover Durability</span>
+          <h3 class="holy-card-title">300TC–400TC Pilgrim Bed Linen</h3>
+          <p class="holy-card-desc">100% long-staple Egyptian cotton with anti-bacterial weave, engineered for 150+ intensive commercial laundry cycles without pilling or graying.</p>
+          <ul class="holy-card-specs">
+            <li><span>✓</span> Ultra-durable double-stitched hems</li>
+            <li><span>✓</span> Pre-shrunk hospital &amp; 5★ grade</li>
+            <li><span>✓</span> Instant bulk buffer replenishment</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="holy-card">
+        <div class="holy-card-img-wrap">
+          <img src="assets/img/amenities.jpg" alt="Tamper-proof Wall Dispensers and Eco Kits" class="holy-card-img" loading="lazy">
+        </div>
+        <div class="holy-card-body">
+          <span class="holy-badge">Rapid Turnover (&lt; 7 Mins)</span>
+          <h3 class="holy-card-title">Housekeeping Flip Amenities</h3>
+          <p class="holy-card-desc">Lockable, tamper-proof 350ml/400ml wall dispensers and biodegradable single-use dry amenities to slash room turnover time by over 40%.</p>
+          <ul class="holy-card-specs">
+            <li><span>✓</span> SFDA registered formulas</li>
+            <li><span>✓</span> Zero housekeeping theft or waste</li>
+            <li><span>✓</span> Alcohol-free formulation options</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="holy-card">
+        <div class="holy-card-img-wrap">
+          <img src="assets/img/mattresses.jpg" alt="Contract Hospitality Mattresses for Holy Sites" class="holy-card-img" loading="lazy">
+        </div>
+        <div class="holy-card-body">
+          <span class="holy-badge">Civil Defense Compliant</span>
+          <h3 class="holy-card-title">Heavy-Duty Contract Mattresses</h3>
+          <p class="holy-card-desc">Engineered for mega-hotels (500–1,500 keys) with high turnover. High-tensile pocket springs, anti-sag reinforced edges, and anti-dust-mite ticking.</p>
+          <ul class="holy-card-specs">
+            <li><span>✓</span> Flame-retardant (BS 7177 Crib 5)</li>
+            <li><span>✓</span> Orthopedic multi-zone support</li>
+            <li><span>✓</span> 10-year commercial warranty</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="holy-card">
+        <div class="holy-card-img-wrap">
+          <img src="assets/img/prayer.jpg" alt="Luxury Prayer Mats & VIP Amenities" class="holy-card-img" loading="lazy">
+        </div>
+        <div class="holy-card-body">
+          <span class="holy-badge">VIP Pilgrim Suite Set</span>
+          <h3 class="holy-card-title">Sacred Ambience &amp; VIP Essentials</h3>
+          <p class="holy-card-desc">Custom luxury prayer rugs with compass alignment, olive-wood misbaha, Kaaba-silhouette room fragrance, and 650 GSM zero-twist Turkish towels.</p>
+          <ul class="holy-card-specs">
+            <li><span>✓</span> Premium memory-foam prayer rugs</li>
+            <li><span>✓</span> Custom embossed hotel crest</li>
+            <li><span>✓</span> Luxury VIP welcome presentations</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="holy-cta center reveal">
+      <div class="holy-cta-box">
+        <div class="holy-cta-text">
+          <h4 style="margin:0 0 6px; font-size:19px; color:#fff;">Managing an Umrah / Hajj Hotel in Makkah or Madinah?</h4>
+          <p style="margin:0; font-size:14px; color:rgba(255,255,255,0.85);">Schedule a sample inspection box delivered directly to your front desk within 24 hours.</p>
+        </div>
+        <div class="holy-cta-btns">
+          <a class="btn btn--gold" href="https://wa.me/966574268856?text=Salam%20LuxeWave%20Team%2C%20we%20manage%20a%20hotel%20property%20in%20Makkah%2FMadinah%20and%20require%20urgent%20Holy%20Sites%20Protocol%20replenishment%20and%20sample%20box." target="_blank" rel="noopener">
+            <span>⚡</span> Priority Holy Sites Desk
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ NEUROMARKETING 1-PO SIMULATOR ═══════════════ -->
+<section class="section section--navy" id="simulator">
+  <div class="wrap">
+    <div class="center reveal">
+      <p class="eyebrow">Interactive B2B Procurement Simulator</p>
+      <h2 class="h-sec">Stop Multi-Vendor Churn. Calculate Instant 1-PO Velocity.</h2>
+      <p class="lead">Tap your property location and room capacity below to instantly simulate monthly waste eliminated, emergency buffer speed, and custom sample box allocation.</p>
+    </div>
+
+    <div class="neuro-box reveal">
+      <div style="font-size:13px; letter-spacing:0.12em; text-transform:uppercase; color:var(--gold-lt); font-weight:700; margin-bottom:8px;">
+        Step 1: Select Property Region &amp; Hospitality Workload
+      </div>
+      <div class="tap-group" id="regionTaps">
+        <button type="button" class="tap-btn active" data-region="holysites" data-label="Makkah &amp; Madinah (Holy Sites)">
+          <span>🕋</span> Makkah &amp; Madinah (Holy Sites • High Churn)
+        </button>
+        <button type="button" class="tap-btn" data-region="capital" data-label="Riyadh &amp; Jeddah (Luxury)">
+          <span>🏙️</span> Riyadh &amp; Jeddah (Luxury 4★/5★ &amp; Corporate)
+        </button>
+        <button type="button" class="tap-btn" data-region="resorts" data-label="Red Sea &amp; Eastern Province">
+          <span>🌴</span> Red Sea &amp; Eastern Province (Boutique &amp; Extended Stay)
+        </button>
+      </div>
+
+      <div style="font-size:13px; letter-spacing:0.12em; text-transform:uppercase; color:var(--gold-lt); font-weight:700; margin-bottom:8px;">
+        Step 2: Select Property Room Count
+      </div>
+      <div class="tap-group" id="roomTaps">
+        <button type="button" class="tap-btn" data-rooms="60">60 Keys (Boutique)</button>
+        <button type="button" class="tap-btn active" data-rooms="150">150 Keys (Mid-Scale)</button>
+        <button type="button" class="tap-btn" data-rooms="350">350 Keys (Full Service)</button>
+        <button type="button" class="tap-btn" data-rooms="750">750+ Keys (Pilgrimage Mega-Hotel)</button>
+      </div>
+
+      <div class="calc-results-grid">
+        <div class="calc-card">
+          <div class="calc-label">Multi-Vendor Waste Eliminated</div>
+          <div class="calc-val" id="calcSavings">SAR 38,400</div>
+          <div class="calc-note">Annual PO processing &amp; logistics overhead</div>
+        </div>
+        <div class="calc-card">
+          <div class="calc-label">Emergency Replenishment</div>
+          <div class="calc-val" id="calcBuffer">24–48 Hours</div>
+          <div class="calc-note">Direct from local in-Kingdom stock</div>
+        </div>
+        <div class="calc-card">
+          <div class="calc-label">Single Invoice (1-PO) Scope</div>
+          <div class="calc-val">33 Amenities + Linen</div>
+          <div class="calc-note">SFDA &amp; SASO verified single delivery</div>
+        </div>
+        <div class="calc-card">
+          <div class="calc-label">Housekeeping Flip Velocity</div>
+          <div class="calc-val" id="calcFlip">&lt; 8 Mins / Room</div>
+          <div class="calc-note">Via tamper-proof wall dispenser systems</div>
+        </div>
+      </div>
+
+      <div class="center" style="margin-top:24px;">
+        <a class="btn btn--gold btn--wa" id="calcWaBtn" href="https://wa.me/966574268856?text=Salam%20LuxeWave%2C%20I%20used%20the%201-PO%20Simulator%20for%20150%20rooms%20in%20Makkah%20%26%20Madinah.%20Please%20dispatch%20complimentary%20VIP%20Sample%20Box." target="_blank" rel="noopener">
+          <span>📲</span> Lock In This 1-PO Rate &amp; Request Sample Box
+        </a>
+        <a class="btn btn--outline" href="https://8k6ikq-g6.myshopify.com/" target="_blank" rel="noopener">
+          Browse Wholesale Shopify Store
+        </a>
+      </div>
     </div>
   </div>
 </section>
@@ -1718,7 +1771,7 @@ window.addEventListener('scroll', () => {
 // ─── PWA SERVICE WORKER REGISTRATION ───
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/sw.js')
+    navigator.serviceWorker.register('./sw.js')
       .then(reg => console.log('LuxeWave PWA ServiceWorker registered:', reg.scope))
       .catch(err => console.log('LuxeWave PWA ServiceWorker failed:', err));
   });

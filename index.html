@@ -16,6 +16,12 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
+<link rel="manifest" href="/manifest.json">
+<link rel="apple-touch-icon" href="assets/icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="LuxeWave">
+<meta name="mobile-web-app-capable" content="yes">
 <link rel="icon" type="image/png" href="assets/logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -354,8 +360,362 @@ footer.foot{background:#08122A;color:var(--tx-inv-2);padding:70px 0 28px;border-
 }
 
 
+
+/* ═══════════════ NEUROMARKETING & PWA STYLES ═══════════════ */
+.neuro-box {
+  background: radial-gradient(circle at 50% 0%, #1B3059 0%, #0B1B3D 100%);
+  border: 1px solid rgba(201, 164, 92, 0.35);
+  border-radius: 16px;
+  padding: 44px 36px;
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.45), 0 0 40px rgba(201, 164, 92, 0.12);
+  margin-top: 36px;
+  position: relative;
+  overflow: hidden;
+}
+.neuro-box::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, transparent, #C9A45C, #E7D3A1, #C9A45C, transparent);
+}
+.tap-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 18px 0 28px;
+}
+.tap-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: #E8ECF5;
+  padding: 12px 22px;
+  border-radius: 30px;
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.22s cubic-bezier(0.2, 0.8, 0.2, 1);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  user-select: none;
+}
+.tap-btn:hover {
+  background: rgba(201, 164, 92, 0.18);
+  border-color: #C9A45C;
+  transform: translateY(-2px);
+  color: #fff;
+}
+.tap-btn:active {
+  transform: scale(0.96);
+}
+.tap-btn.active {
+  background: linear-gradient(135deg, #C9A45C 0%, #A5823C 100%);
+  color: #0B1B3D;
+  border-color: #E7D3A1;
+  box-shadow: 0 4px 20px rgba(201, 164, 92, 0.4);
+  font-weight: 700;
+}
+.calc-results-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  background: rgba(11, 27, 61, 0.65);
+  border: 1px solid rgba(201, 164, 92, 0.22);
+  border-radius: 12px;
+  padding: 24px;
+  margin: 28px 0;
+}
+.calc-card {
+  text-align: center;
+  padding: 10px;
+}
+.calc-label {
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(232, 236, 245, 0.7);
+  margin-bottom: 6px;
+}
+.calc-val {
+  font-family: var(--serif);
+  font-size: 26px;
+  font-weight: 800;
+  color: #E7D3A1;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+}
+.calc-note {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.6);
+  margin-top: 4px;
+}
+
+/* Holy Sites Section */
+.holy-card {
+  background: #ffffff;
+  border: 1px solid rgba(11, 27, 61, 0.08);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(11, 27, 61, 0.06);
+  transition: transform 0.3s var(--ease), box-shadow 0.3s;
+}
+.holy-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 45px rgba(11, 27, 61, 0.14);
+}
+.holy-card-img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+}
+.holy-card-body {
+  padding: 26px 22px;
+}
+.holy-badge {
+  display: inline-block;
+  background: #0B1B3D;
+  color: #C9A45C;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 4px;
+  margin-bottom: 12px;
+}
+
+/* PWA Install Floating Banner */
+.pwa-banner {
+  position: fixed;
+  bottom: 24px;
+  left: 24px;
+  z-index: 99;
+  background: rgba(11, 27, 61, 0.95);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(201, 164, 92, 0.4);
+  border-radius: 50px;
+  padding: 8px 18px 8px 10px;
+  display: none;
+  align-items: center;
+  gap: 14px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+  animation: slideUp 0.4s var(--ease);
+}
+@keyframes slideUp {
+  from { transform: translateY(100%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+.pwa-banner img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid #C9A45C;
+}
+.pwa-text {
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+}
+.pwa-text span {
+  display: block;
+  font-size: 11px;
+  color: #C9A45C;
+  font-weight: 400;
+}
+.pwa-close {
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  font-size: 16px;
+  padding: 4px 8px;
+}
+.pwa-close:hover { color: #fff; }
+
+@media (max-width: 768px) {
+  .calc-results-grid { grid-template-columns: repeat(2, 1fr); }
+  .pwa-banner { left: 16px; right: 16px; border-radius: 16px; }
+}
+
 </style>
-<noscript><style>.reveal{opacity:1;transform:none}</style></noscript>
+<noscript><style>.reveal{opacity:1;transform:none}
+/* ═══════════════ NEUROMARKETING & PWA STYLES ═══════════════ */
+.neuro-box {
+  background: radial-gradient(circle at 50% 0%, #1B3059 0%, #0B1B3D 100%);
+  border: 1px solid rgba(201, 164, 92, 0.35);
+  border-radius: 16px;
+  padding: 44px 36px;
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.45), 0 0 40px rgba(201, 164, 92, 0.12);
+  margin-top: 36px;
+  position: relative;
+  overflow: hidden;
+}
+.neuro-box::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, transparent, #C9A45C, #E7D3A1, #C9A45C, transparent);
+}
+.tap-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 18px 0 28px;
+}
+.tap-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: #E8ECF5;
+  padding: 12px 22px;
+  border-radius: 30px;
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.22s cubic-bezier(0.2, 0.8, 0.2, 1);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  user-select: none;
+}
+.tap-btn:hover {
+  background: rgba(201, 164, 92, 0.18);
+  border-color: #C9A45C;
+  transform: translateY(-2px);
+  color: #fff;
+}
+.tap-btn:active {
+  transform: scale(0.96);
+}
+.tap-btn.active {
+  background: linear-gradient(135deg, #C9A45C 0%, #A5823C 100%);
+  color: #0B1B3D;
+  border-color: #E7D3A1;
+  box-shadow: 0 4px 20px rgba(201, 164, 92, 0.4);
+  font-weight: 700;
+}
+.calc-results-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  background: rgba(11, 27, 61, 0.65);
+  border: 1px solid rgba(201, 164, 92, 0.22);
+  border-radius: 12px;
+  padding: 24px;
+  margin: 28px 0;
+}
+.calc-card {
+  text-align: center;
+  padding: 10px;
+}
+.calc-label {
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(232, 236, 245, 0.7);
+  margin-bottom: 6px;
+}
+.calc-val {
+  font-family: var(--serif);
+  font-size: 26px;
+  font-weight: 800;
+  color: #E7D3A1;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+}
+.calc-note {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.6);
+  margin-top: 4px;
+}
+
+/* Holy Sites Section */
+.holy-card {
+  background: #ffffff;
+  border: 1px solid rgba(11, 27, 61, 0.08);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(11, 27, 61, 0.06);
+  transition: transform 0.3s var(--ease), box-shadow 0.3s;
+}
+.holy-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 45px rgba(11, 27, 61, 0.14);
+}
+.holy-card-img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+}
+.holy-card-body {
+  padding: 26px 22px;
+}
+.holy-badge {
+  display: inline-block;
+  background: #0B1B3D;
+  color: #C9A45C;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 4px;
+  margin-bottom: 12px;
+}
+
+/* PWA Install Floating Banner */
+.pwa-banner {
+  position: fixed;
+  bottom: 24px;
+  left: 24px;
+  z-index: 99;
+  background: rgba(11, 27, 61, 0.95);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(201, 164, 92, 0.4);
+  border-radius: 50px;
+  padding: 8px 18px 8px 10px;
+  display: none;
+  align-items: center;
+  gap: 14px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+  animation: slideUp 0.4s var(--ease);
+}
+@keyframes slideUp {
+  from { transform: translateY(100%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+.pwa-banner img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid #C9A45C;
+}
+.pwa-text {
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+}
+.pwa-text span {
+  display: block;
+  font-size: 11px;
+  color: #C9A45C;
+  font-weight: 400;
+}
+.pwa-close {
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  font-size: 16px;
+  padding: 4px 8px;
+}
+.pwa-close:hover { color: #fff; }
+
+@media (max-width: 768px) {
+  .calc-results-grid { grid-template-columns: repeat(2, 1fr); }
+  .pwa-banner { left: 16px; right: 16px; border-radius: 16px; }
+}
+
+</style></noscript>
 </head>
 <body>
 
@@ -373,6 +733,8 @@ footer.foot{background:#08122A;color:var(--tx-inv-2);padding:70px 0 28px;border-
         <li><a href="#about">About</a></li>
         <li><a href="#categories">What We Supply</a></li>
         <li><a href="#mattresses">Mattresses</a></li>
+        <li><a href="#holysites" style="color:var(--gold-lt);">Holy Sites Protocol</a></li>
+        <li><a href="#simulator">1-PO Calculator</a></li>
         <li><a href="#why">Why Us</a></li>
         <li><a href="#compliance">Compliance</a></li>
         <li><a href="#contact">Contact</a></li>
@@ -428,6 +790,77 @@ footer.foot{background:#08122A;color:var(--tx-inv-2);padding:70px 0 28px;border-
 </div>
 
 <!-- ═══════════════ ABOUT ═══════════════ -->
+
+<!-- ═══════════════ NEUROMARKETING 1-PO SIMULATOR ═══════════════ -->
+<section class="section section--navy" id="simulator">
+  <div class="wrap">
+    <div class="center reveal">
+      <p class="eyebrow">Interactive B2B Procurement Simulator</p>
+      <h2 class="h-sec">Stop Multi-Vendor Churn. Calculate Instant 1-PO Velocity.</h2>
+      <p class="lead">Tap your property location and room capacity below to instantly simulate monthly waste eliminated, emergency buffer speed, and custom sample box allocation.</p>
+    </div>
+
+    <div class="neuro-box reveal">
+      <div style="font-size:13px; letter-spacing:0.12em; text-transform:uppercase; color:var(--gold-lt); font-weight:700; margin-bottom:8px;">
+        Step 1: Select Property Region & Hospitality Workload
+      </div>
+      <div class="tap-group" id="regionTaps">
+        <button type="button" class="tap-btn active" data-region="holysites" data-label="Makkah & Madinah (Holy Sites)">
+          <span>🕋</span> Makkah &amp; Madinah (Holy Sites • High Churn)
+        </button>
+        <button type="button" class="tap-btn" data-region="capital" data-label="Riyadh & Jeddah (Luxury)">
+          <span>🏙️</span> Riyadh &amp; Jeddah (Luxury 4★/5★ &amp; Corporate)
+        </button>
+        <button type="button" class="tap-btn" data-region="resorts" data-label="Red Sea & Eastern Province">
+          <span>🌴</span> Red Sea &amp; Eastern Province (Boutique &amp; Extended Stay)
+        </button>
+      </div>
+
+      <div style="font-size:13px; letter-spacing:0.12em; text-transform:uppercase; color:var(--gold-lt); font-weight:700; margin-bottom:8px;">
+        Step 2: Select Property Room Count
+      </div>
+      <div class="tap-group" id="roomTaps">
+        <button type="button" class="tap-btn" data-rooms="60">60 Keys (Boutique)</button>
+        <button type="button" class="tap-btn active" data-rooms="150">150 Keys (Mid-Scale)</button>
+        <button type="button" class="tap-btn" data-rooms="350">350 Keys (Full Service)</button>
+        <button type="button" class="tap-btn" data-rooms="750">750+ Keys (Pilgrimage Mega-Hotel)</button>
+      </div>
+
+      <div class="calc-results-grid">
+        <div class="calc-card">
+          <div class="calc-label">Multi-Vendor Waste Eliminated</div>
+          <div class="calc-val" id="calcSavings">SAR 38,400</div>
+          <div class="calc-note">Annual PO processing & logistics overhead</div>
+        </div>
+        <div class="calc-card">
+          <div class="calc-label">Emergency Replenishment</div>
+          <div class="calc-val" id="calcBuffer">24–48 Hours</div>
+          <div class="calc-note">Direct from local in-Kingdom stock</div>
+        </div>
+        <div class="calc-card">
+          <div class="calc-label">Single Invoice (1-PO) Scope</div>
+          <div class="calc-val">33 Amenities + Linen</div>
+          <div class="calc-note">SFDA & SASO verified single delivery</div>
+        </div>
+        <div class="calc-card">
+          <div class="calc-label">Housekeeping Flip Velocity</div>
+          <div class="calc-val" id="calcFlip">&lt; 8 Mins / Room</div>
+          <div class="calc-note">Via tamper-proof wall dispenser systems</div>
+        </div>
+      </div>
+
+      <div class="center" style="margin-top:24px;">
+        <a class="btn btn--gold btn--wa" id="calcWaBtn" href="https://wa.me/966574268856?text=Salam%20LuxeWave%2C%20I%20used%20the%201-PO%20Simulator%20for%20150%20rooms%20in%20Makkah%20%26%20Madinah.%20Please%20dispatch%20complimentary%20VIP%20Sample%20Box." target="_blank" rel="noopener">
+          <span>📲</span> Lock In This 1-PO Rate &amp; Request Sample Box
+        </a>
+        <a class="btn btn--outline" href="https://8k6ikq-g6.myshopify.com/" target="_blank" rel="noopener" style="margin-left:12px;">
+          Browse Wholesale Shopify Store
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="section section--cream" id="about">
   <div class="wrap">
     <div class="about-grid">
@@ -1266,5 +1699,129 @@ window.addEventListener('scroll', () => {
   });
 })();
 </script>
+
+<!-- ═══════════════ PWA NATIVE INSTALL BANNER ═══════════════ -->
+<div class="pwa-banner" id="pwaBanner">
+  <img src="assets/icon-192.png" alt="LuxeWave App Icon">
+  <div class="pwa-text">
+    Install LuxeWave B2B App
+    <span>1-PO Hotel Supplies &amp; Offline Catalogue</span>
+  </div>
+  <button type="button" class="btn btn--gold btn--sm" id="pwaInstallBtn" style="padding:6px 14px; font-size:12px;">
+    Install App
+  </button>
+  <button type="button" class="pwa-close" id="pwaCloseBtn" aria-label="Dismiss">&times;</button>
+</div>
+
+
+<script>
+// ─── PWA SERVICE WORKER REGISTRATION ───
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js')
+      .then(reg => console.log('LuxeWave PWA ServiceWorker registered:', reg.scope))
+      .catch(err => console.log('LuxeWave PWA ServiceWorker failed:', err));
+  });
+}
+
+// ─── PWA INSTALL PROMPT HANDLER ───
+let deferredPrompt = null;
+const pwaBanner = document.getElementById('pwaBanner');
+const pwaInstallBtn = document.getElementById('pwaInstallBtn');
+const pwaCloseBtn = document.getElementById('pwaCloseBtn');
+
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+  if (pwaBanner && !sessionStorage.getItem('pwa_dismissed')) {
+    pwaBanner.style.display = 'flex';
+  }
+});
+
+if (pwaInstallBtn) {
+  pwaInstallBtn.addEventListener('click', async () => {
+    if (deferredPrompt) {
+      deferredPrompt.prompt();
+      const { outcome } = await deferredPrompt.userChoice;
+      console.log('PWA install outcome:', outcome);
+      deferredPrompt = null;
+      if (pwaBanner) pwaBanner.style.display = 'none';
+    }
+  });
+}
+
+if (pwaCloseBtn) {
+  pwaCloseBtn.addEventListener('click', () => {
+    if (pwaBanner) pwaBanner.style.display = 'none';
+    sessionStorage.setItem('pwa_dismissed', 'true');
+  });
+}
+
+// ─── NEUROMARKETING DOPAMINE SIMULATOR ───
+(function() {
+  const regionTaps = document.querySelectorAll('#regionTaps .tap-btn');
+  const roomTaps = document.querySelectorAll('#roomTaps .tap-btn');
+  const calcSavings = document.getElementById('calcSavings');
+  const calcBuffer = document.getElementById('calcBuffer');
+  const calcFlip = document.getElementById('calcFlip');
+  const calcWaBtn = document.getElementById('calcWaBtn');
+
+  let currentRegion = 'holysites';
+  let currentRegionLabel = 'Makkah & Madinah (Holy Sites)';
+  let currentRooms = 150;
+
+  function updateSimulator() {
+    let savingsPerRoom = 250;
+    let bufferTime = '24–48 Hours';
+    let flipTime = '< 8 Mins / Room';
+
+    if (currentRegion === 'holysites') {
+      savingsPerRoom = 320;
+      bufferTime = '24h Emergency Buffer';
+      flipTime = '< 7 Mins (Pilgrim Flip)';
+    } else if (currentRegion === 'capital') {
+      savingsPerRoom = 260;
+      bufferTime = '24–48h Riyadh Stock';
+      flipTime = '< 9 Mins / Suite';
+    } else {
+      savingsPerRoom = 290;
+      bufferTime = '48h Dedicated Logistics';
+      flipTime = '< 10 Mins / Villa';
+    }
+
+    const totalAnnualSavings = Math.round(currentRooms * savingsPerRoom);
+    calcSavings.textContent = 'SAR ' + totalAnnualSavings.toLocaleString();
+    calcBuffer.textContent = bufferTime;
+    calcFlip.textContent = flipTime;
+
+    const waMsg = encodeURIComponent(
+      `Salam LuxeWave Team, I used the 1-PO Simulator for ${currentRooms} rooms in ${currentRegionLabel}. Estimated annual overhead savings: SAR ${totalAnnualSavings.toLocaleString()}. Please dispatch a complimentary VIP Sample Box to our property.`
+    );
+    calcWaBtn.href = `https://wa.me/966574268856?text=${waMsg}`;
+  }
+
+  regionTaps.forEach(btn => {
+    btn.addEventListener('click', () => {
+      regionTaps.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentRegion = btn.getAttribute('data-region');
+      currentRegionLabel = btn.getAttribute('data-label');
+      updateSimulator();
+    });
+  });
+
+  roomTaps.forEach(btn => {
+    btn.addEventListener('click', () => {
+      roomTaps.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentRooms = parseInt(btn.getAttribute('data-rooms'), 10);
+      updateSimulator();
+    });
+  });
+
+  updateSimulator();
+})();
+</script>
+
 </body>
 </html>

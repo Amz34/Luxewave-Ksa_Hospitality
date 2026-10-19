@@ -1,0 +1,57 @@
+{
+  "name": "LuxeWave B2B Hospitality Procurement",
+  "short_name": "LuxeWave KSA",
+  "description": "Wholesale 1-PO Hotel Supplies, Contract Bedding & Amenities for KSA Luxury & Holy Sites Properties",
+  "start_url": "/?utm_source=pwa_app",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#0B1B3D",
+  "theme_color": "#0B1B3D",
+  "lang": "en-SA",
+  "dir": "ltr",
+  "categories": ["business", "shopping", "productivity"],
+  "icons": [
+    {
+      "src": "assets/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Holy Sites Procurement",
+      "short_name": "Holy Sites",
+      "description": "Rapid Hajj & Umrah Hotel Replenishment",
+      "url": "/#holysites",
+      "icons": [{ "src": "assets/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "1-PO Wholesale Store",
+      "short_name": "Wholesale",
+      "description": "Browse 33 Amenities & Contract Bedding",
+      "url": "https://8k6ikq-g6.myshopify.com",
+      "icons": [{ "src": "assets/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Instant WhatsApp Quote",
+      "short_name": "Quote",
+      "description": "Direct Procurement VIP Desk",
+      "url": "https://wa.me/966574268856?text=Salam%20LuxeWave%20Team%2C%20requesting%20urgent%20B2B%20hotel%20procurement%20quote",
+      "icons": [{ "src": "assets/icon-192.png", "sizes": "192x192" }]
+    }
+  ]
+}

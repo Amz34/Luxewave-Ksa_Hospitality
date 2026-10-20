@@ -8,7 +8,7 @@ BUSINESS FACTS (use these, never invent others):
 - Commercial Registration (CR): 7050248579
 - Certifications: SFDA, ISO 9001, SASO
 - Phone/WhatsApp: +966 57 426 8856
-- Email: azengineeringapp@gmail.com
+- Email: contact@luxewave.pp.ua
 - Products: hotel amenities, bed & bath linen, mattresses, room essentials, prayer rugs, Qurans, Qibla signs, electronic safes, door hardware, luggage trolleys, laundry trolleys, bathroom mirrors, LED fixtures, kettles, cups, room service sets, honour barriers, lobby signage
 - Serves: 4-star and 5-star hotels, furnished apartments, hospitals
 - Coverage: all KSA

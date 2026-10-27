@@ -33,6 +33,29 @@ app.get('/api/health', (req, res) => {
 // Contact form submission endpoint
 const fs = require('fs');
 const path = require('path');
+const { spawn } = require('child_process');
+
+function notifyTelegramAzGem(lead) {
+  try {
+    const script = `
+import sys
+sys.path.insert(0, '/home/ubuntu/projects/Luxewave-Ksa_Hospitality')
+from engine.telegram_notifier import dispatch_new_b2b_inquiry_alert
+lead = {
+    'name': ${JSON.stringify(lead.name || 'Anonymous')},
+    'property_name': 'Hospitality Property',
+    'region_en': 'KSA Client',
+    'source': ${JSON.stringify(lead.source || 'Website Contact Form')},
+    'message': ${JSON.stringify(lead.message || 'RFQ Submission')}
+}
+dispatch_new_b2b_inquiry_alert(lead)
+`;
+    const p = spawn('python3', ['-c', script], { detached: true, stdio: 'ignore' });
+    p.unref();
+  } catch (err) {
+    console.error('Failed to trigger Telegram alert:', err.message);
+  }
+}
 
 app.post('/api/contact', (req, res) => {
   const { name, phone, email = '', message = '' } = req.body || {};
@@ -47,6 +70,7 @@ app.post('/api/contact', (req, res) => {
     phone,
     email,
     message,
+    source: 'Website Contact Form',
     receivedAt: new Date().toISOString(),
   };
 
@@ -56,6 +80,7 @@ app.post('/api/contact', (req, res) => {
   fs.writeFileSync(file, JSON.stringify(entry, null, 2), 'utf8');
 
   console.log(`📩 New contact submission from ${name} (${phone})`);
+  notifyTelegramAzGem(entry);
   res.json({ success: true, id: entry.id });
 });
 
@@ -83,6 +108,7 @@ app.post('/api/lead', (req, res) => {
   fs.writeFileSync(file, JSON.stringify(entry, null, 2), 'utf8');
 
   console.log(`💼 New lead from ${name} (${whatsapp}) — source: ${source}`);
+  notifyTelegramAzGem(entry);
   res.json({ success: true, id: entry.id });
 });
 

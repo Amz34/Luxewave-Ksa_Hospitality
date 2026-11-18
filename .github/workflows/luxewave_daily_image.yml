@@ -1,0 +1,38 @@
+name: Luxe Wave Daily Image Dispatch
+
+on:
+  workflow_dispatch:
+    inputs:
+      topic:
+        description: 'Catalog Theme (bedding, mattress, amenities, towels, arabic)'
+        required: false
+        default: 'bedding'
+
+permissions:
+  contents: write
+
+jobs:
+  dispatch_image:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Dependencies
+        run: |
+          pip install pillow requests
+
+      - name: Run Luxe Wave Image Dispatch Engine
+        env:
+          LUXEWAVE_PAGE_TOKEN: ${{ secrets.LUXEWAVE_PAGE_TOKEN }}
+          LUXEWAVE_PAGE_ID: ${{ secrets.LUXEWAVE_PAGE_ID }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          THEME: ${{ github.event.inputs.topic }}
+        run: |
+          python engine/dispatch_image_action.py

@@ -24,20 +24,20 @@ THEMES = {
     "bedding": {
         "title": "Five-Star Bedding Collection",
         "subtitle": "400-Thread Count Egyptian Cotton Sheets & Duvets",
-        "caption": "Your guests spend eight hours deciding whether to return.\n\nCrisp 400-thread count Egyptian cotton bedding, cloud-soft duvets, and hypoallergenic pillow suites engineered for heavy industrial laundering without losing structure.\n\nLuxe Wave Trading Est. (CR 7050248579) delivers verified hotel-grade bedding across Riyadh, Jeddah, Makkah, and Madinah.\n\nExplore our catalog:\nhttps://luxewave.store\n\n#LuxeWave #HotelSupplies #HospitalityKSA #SaudiHotels #RiyadhHotels",
-        "comment": "Catalog and wholesale ordering: https://luxewave.store"
+        "caption": "Your guests spend eight hours deciding whether to return.\n\nCrisp 400-thread count Egyptian cotton bedding, cloud-soft duvets, and hypoallergenic pillow suites engineered for heavy industrial laundering without losing structure.\n\nLuxe Wave Trading Est. (CR 7050248579) delivers verified hotel-grade bedding across Riyadh, Jeddah, Makkah, and Madinah.\n\nExplore our catalog:\nhttps://amz34.github.io/Luxewave-Ksa_Hospitality/\n\n#LuxeWave #HotelSupplies #HospitalityKSA #SaudiHotels #RiyadhHotels",
+        "comment": "Catalog and wholesale ordering: https://amz34.github.io/Luxewave-Ksa_Hospitality/"
     },
     "mattress": {
         "title": "Oasis Commercial Mattress Series",
         "subtitle": "Engineered Pocket-Spring Durability for 300+ Stays",
-        "caption": "Most properties do not lose guests in the lobby. They lose them on night two.\n\nA mattress engineered specifically for high commercial turnover: reinforced edge support, independent pocket coils, and breathable high-density comfort foam.\n\nLuxe Wave supplies the Oasis series to premier hotels across the Kingdom.\n\nhttps://luxewave.store\n\n#LuxeWave #HotelProcurement #CommercialBedding #SaudiHospitality",
-        "comment": "Contract specs and wholesale pricing: https://luxewave.store"
+        "caption": "Most properties do not lose guests in the lobby. They lose them on night two.\n\nA mattress engineered specifically for high commercial turnover: reinforced edge support, independent pocket coils, and breathable high-density comfort foam.\n\nLuxe Wave supplies the Oasis series to premier hotels across the Kingdom.\n\nhttps://amz34.github.io/Luxewave-Ksa_Hospitality/\n\n#LuxeWave #HotelProcurement #CommercialBedding #SaudiHospitality",
+        "comment": "Contract specs and wholesale pricing: https://amz34.github.io/Luxewave-Ksa_Hospitality/"
     },
     "amenities": {
         "title": "Bespoke Guest Care Amenities",
         "subtitle": "Botanical In-Room Vanity Care & Zero-Plastic Packaging",
-        "caption": "Turnkey guest amenities supplied directly to your housekeeping hub.\n\nEliminate multiple vendor friction with standardized packaging, eco-conscious botanical formulations, and guaranteed replenishment SLAs.\n\nhttps://luxewave.store\n\n#LuxeWave #HotelAmenities #HospitalitySupply #Procurement #Riyadh",
-        "comment": "Direct inquiries and sample kits: https://luxewave.store"
+        "caption": "Turnkey guest amenities supplied directly to your housekeeping hub.\n\nEliminate multiple vendor friction with standardized packaging, eco-conscious botanical formulations, and guaranteed replenishment SLAs.\n\nhttps://amz34.github.io/Luxewave-Ksa_Hospitality/\n\n#LuxeWave #HotelAmenities #HospitalitySupply #Procurement #Riyadh",
+        "comment": "Direct inquiries and sample kits: https://amz34.github.io/Luxewave-Ksa_Hospitality/"
     }
 }
 
@@ -74,7 +74,7 @@ d.text((W//2 - 220, 880), theme_data["title"].upper(), fill=WHITE)
 d.text((W//2 - 250, 930), theme_data["subtitle"], fill=MUTED)
 d.rounded_rectangle([290, 1050, 790, 1120], radius=35, fill=GOLD)
 d.text((340, 1068), "REQUEST CATALOG & SAMPLES", fill=(10, 14, 20))
-d.text((W//2 - 160, 1180), "Portal: https://luxewave.store", fill=GOLD)
+d.text((W//2 - 160, 1180), "Portal: https://amz34.github.io/Luxewave-Ksa_Hospitality/", fill=GOLD)
 
 img.save(out_img, quality=95)
 print(f"Generated card: {out_img}")
